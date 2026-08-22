@@ -1,0 +1,54 @@
+project:
+  name: nlp-event_detection
+  seed: 10
+  device: mps                                           # cpu, cuda, mps
+  hp:
+    recreate: False
+    id: 9                                               # store different version of hyper-parameters
+  glove:
+    glove_size: 6                                       #   6,  42, 840
+    glove_embed_dim: 300                                # 100, 200, 300
+    read: False
+    recreate: False
+    recreate_embed: False
+  vocab:
+    recreate: False
+    id: 9                                               # store different version of model's vocabulary
+  ngrams:
+    randomize_data: False
+    reduced_ngrams: False
+    recreate_ngrams: False
+
+
+paths:
+  data: data
+  load_existing_data: False
+  utils_path: utils/
+  glove_path: utils/GloVe
+  ngrams_path: utils/ngrams
+  dict_path: utils/dictionaries
+
+
+model:
+  embed_latent_dim: 300
+  lstm_latent_dim: 700
+  bi_lstm: True
+  dropout_rate: 0.5
+  ngrams_size: 3
+  ngrams_shifting: 1
+  optim: Adam
+  lr: 0.001
+  beta1: 0.9
+  beta2: 0.999
+  weight_decay: 0.0001
+
+
+training:
+  ckpt_path: ckpt
+  epochs: 3
+  resume: True                                          # True, False
+  last_epoch: 6                                         # Epoch to resume the training
+  add_epoch: 2                                          # Additional training epochs
+  batch_size: 32
+  grad_accumulation: 1                                 # 1 to avoid gradient accomulation
+  learning_rate: 0.0001
